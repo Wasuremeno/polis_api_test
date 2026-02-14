@@ -16,13 +16,13 @@ export default function Create() {
             method: 'POST',
 
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
 
             body: JSON.stringify({
                 title,
-                content
-            })
+                content,
+            }),
 
         })
         .then(res => res.json())
@@ -36,38 +36,45 @@ export default function Create() {
     return (
         <MainLayout>
 
-            <div className="max-w-3xl mx-auto">
+            <div className="max-w-2xl mx-auto">
 
-                <Link href="/articles">
-                    ← Back
-                </Link>
-
-                <h1 className="text-3xl font-bold mt-4 mb-6">
-                    Create Article
+                <h1 className="text-3xl font-bold text-gray-900 mb-8">
+                    Create New Article
                 </h1>
 
-                <form onSubmit={submit} className="space-y-4">
+                <form onSubmit={submit} className="space-y-6">
 
                     <input
                         value={title}
                         onChange={e => setTitle(e.target.value)}
-                        placeholder="Title"
-                        className="border p-2 w-full"
                         required
+                        placeholder="Title"
+                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
 
                     <textarea
                         value={content}
                         onChange={e => setContent(e.target.value)}
-                        placeholder="Content"
-                        className="border p-2 w-full"
-                        rows={6}
                         required
+                        rows={10}
+                        placeholder="Content"
+                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />
 
-                    <button className="bg-indigo-600 text-white px-4 py-2 rounded">
-                        Create
-                    </button>
+                    <div className="flex items-center space-x-4">
+
+                        <button className="inline-flex justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500">
+                            Create Article
+                        </button>
+
+                        <Link
+                            href="/articles"
+                            className="text-sm font-semibold text-gray-900 hover:text-gray-700"
+                        >
+                            Cancel
+                        </Link>
+
+                    </div>
 
                 </form>
 

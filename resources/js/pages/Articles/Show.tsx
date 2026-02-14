@@ -31,13 +31,13 @@ export default function Show({ id }: Props) {
             method: 'POST',
 
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
 
             body: JSON.stringify({
                 author_name: author,
-                content
-            })
+                content,
+            }),
 
         })
         .then(res => res.json())
@@ -47,7 +47,7 @@ export default function Show({ id }: Props) {
 
             setArticle({
                 ...article,
-                comments: [...(article.comments || []), comment]
+                comments: [...(article.comments ?? []), comment],
             });
 
             setAuthor('');
@@ -56,79 +56,128 @@ export default function Show({ id }: Props) {
     }
 
     if (!article) {
-        return <MainLayout>Loading...</MainLayout>;
+
+        return (
+            <MainLayout>
+                <div className="text-center py-12 text-gray-500">
+                    Loading article...
+                </div>
+            </MainLayout>
+        );
+
     }
 
     return (
         <MainLayout>
 
-            <div className="max-w-3xl mx-auto">
+            <article className="space-y-8">
 
-                <Link href="/articles">
-                    ← Back
-                </Link>
+                <div>
 
-                <h1 className="text-3xl font-bold mt-4">
-                    {article.title}
-                </h1>
+                    <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                        {article.title}
+                    </h1>
 
-                <p className="text-gray-500">
-                    {new Date(article.created_at).toLocaleDateString()}
-                </p>
-
-                <p className="mt-4 whitespace-pre-wrap">
-                    {article.content}
-                </p>
-
-                <h2 className="text-xl font-bold mt-8 mb-4">
-                    Comments
-                </h2>
-
-                <form onSubmit={submit} className="space-y-2 mb-6">
-
-                    <input
-                        value={author}
-                        onChange={e => setAuthor(e.target.value)}
-                        placeholder="Your name"
-                        className="border p-2 w-full"
-                        required
-                    />
-
-                    <textarea
-                        value={content}
-                        onChange={e => setContent(e.target.value)}
-                        placeholder="Comment"
-                        className="border p-2 w-full"
-                        required
-                    />
-
-                    <button className="bg-indigo-600 text-white px-4 py-2 rounded">
-                        Add comment
-                    </button>
-
-                </form>
-
-                <div className="space-y-4">
-
-                    {article.comments?.map(comment => (
-
-                        <div key={comment.id} className="border p-3 rounded">
-
-                            <div className="font-bold">
-                                {comment.author_name}
-                            </div>
-
-                            <div>
-                                {comment.content}
-                            </div>
-
-                        </div>
-
-                    ))}
+                    <p className="text-sm text-gray-500">
+                        {new Date(article.created_at).toLocaleDateString()}
+                    </p>
 
                 </div>
 
-            </div>
+                <div className="prose max-w-none">
+
+                    <p className="text-gray-700 whitespace-pre-wrap">
+                        {article.content}
+                    </p>
+
+                </div>
+
+                <div className="border-t pt-8">
+
+                    <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                        Comments
+                    </h2>
+
+                    <form onSubmit={submit} className="mb-8 space-y-4">
+
+                        <input
+                            value={author}
+                            onChange={e => setAuthor(e.target.value)}
+                            placeholder="Your Name"
+                            required
+                            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        />
+
+                        <textarea
+                            value={content}
+                            onChange={e => setContent(e.target.value)}
+                            placeholder="Comment"
+                            required
+                            rows={4}
+                            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        />
+
+                        <button className="inline-flex justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500">
+                            Post Comment
+                        </button>
+
+                    </form>
+
+                    <div className="space-y-6">
+
+                        {article.comments?.length ? (
+
+                            article.comments.map(comment => (
+
+                                <div
+                                    key={comment.id}
+                                    className="border-l-4 border-indigo-200 bg-gray-50 p-4"
+                                >
+
+                                    <div className="flex justify-between mb-2">
+
+                                        <span className="font-medium text-gray-900">
+                                            {comment.author_name}
+                                        </span>
+
+                                        <span className="text-sm text-gray-500">
+                                            {new Date(comment.created_at).toLocaleDateString()}
+                                        </span>
+
+                                    </div>
+
+                                    <p className="text-gray-700">
+                                        {comment.content}
+                                    </p>
+
+                                </div>
+
+                            ))
+
+                        ) : (
+
+                            <p className="text-gray-500 text-center py-4">
+                                No comments yet.
+                            </p>
+
+                        )}
+
+                    </div>
+
+                    <div className="mt-8">
+
+                        <Link
+                            href="/articles"
+                            className="text-indigo-600 hover:text-indigo-500"
+                        >
+                            ← Back to all articles
+                        </Link>
+
+                    </div>
+
+                </div>
+
+            </article>
 
         </MainLayout>
     );
