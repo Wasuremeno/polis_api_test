@@ -82,7 +82,7 @@ export default function Create() {
                             value={title}
                             onChange={e => setTitle(e.target.value)}
                             required
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                         />
 
                     </div>
@@ -98,7 +98,7 @@ export default function Create() {
                             onChange={e => setContent(e.target.value)}
                             rows={10}
                             required
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                         />
 
                     </div>
@@ -107,7 +107,7 @@ export default function Create() {
 
                         <button
                             disabled={submitting}
-                            className="inline-flex justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 disabled:opacity-50"
+                            className="inline-flex justify-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 disabled:opacity-50"
                         >
                             {submitting ? 'Creating...' : 'Create Article'}
                         </button>

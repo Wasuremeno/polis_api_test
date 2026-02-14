@@ -22,7 +22,8 @@ export default function MainLayout({ children }: Props) {
                                 href="/"
                                 className="flex items-center text-xl font-semibold text-gray-900"
                             >
-                                Simple Blog
+                        <span className="text-black">Simple</span>
+                        <span className="text-blue-700">Blog</span>
                             </Link>
 
                             <div className="ml-10 flex items-center space-x-4">
