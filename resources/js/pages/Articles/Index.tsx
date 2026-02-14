@@ -89,7 +89,7 @@ export default function Index() {
                             </p>
 
                             <div className="mt-4 text-sm text-indigo-600">
-                                {article.comments?.length ?? 0} comments
+                                {article.comments_count} comments
                             </div>
 
                         </Link>

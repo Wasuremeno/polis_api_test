@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export type * from './auth';
 
 
@@ -10,6 +12,7 @@ export interface Comment {
 }
 
 export interface Article {
+    comments_count: ReactNode;
     id: number;
     title: string;
     content: string;

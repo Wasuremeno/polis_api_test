@@ -2,30 +2,37 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\Article;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class ArticleController extends Controller
 {
+    // GET /api/articles
     public function index()
     {
-        return Article::latest()->get();
+        // Возвращаем все статьи с количеством комментариев
+        return Article::withCount('comments')->get();
     }
 
+    // GET /api/articles/{article}
     public function show(Article $article)
     {
-        return $article->load('comments');
+        // Загружаем все комментарии для статьи
+        $article->load('comments');
+
+        return $article;
     }
 
+    // POST /api/articles
     public function store(Request $request)
     {
-        $article = Article::create(
-            $request->validate([
-                'title' => 'required|string|max:255',
-                'content' => 'required|string',
-            ])
-        );
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+        $article = Article::create($validated);
 
         return response()->json($article, 201);
     }
