@@ -7,14 +7,32 @@ export default function Index() {
 
     const [articles, setArticles] = useState<Article[]>([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
 
         fetch('/api/articles')
-            .then(res => res.json())
+
+            .then(async res => {
+
+                if (!res.ok) {
+                    throw new Error(`HTTP ${res.status}`);
+                }
+
+                return res.json();
+
+            })
             .then(data => {
+
                 setArticles(data);
                 setLoading(false);
+
+            })
+            .catch(err => {
+
+                setError(err.message);
+                setLoading(false);
+
             });
 
     }, []);
@@ -22,7 +40,19 @@ export default function Index() {
     if (loading) {
         return (
             <MainLayout>
-                Loading...
+                <div className="text-center py-12">
+                    <div className="text-gray-500">Loading articles...</div>
+                </div>
+            </MainLayout>
+        );
+    }
+
+    if (error) {
+        return (
+            <MainLayout>
+                <div className="text-center py-12">
+                    <div className="text-red-500">Error: {error}</div>
+                </div>
             </MainLayout>
         );
     }
@@ -30,44 +60,37 @@ export default function Index() {
     return (
         <MainLayout>
 
-            <div className="max-w-3xl mx-auto">
+            <div className="space-y-8">
 
-                <div className="flex justify-between mb-6">
+                <h1 className="text-3xl font-bold text-gray-900">
+                    Articles
+                </h1>
 
-                    <h1 className="text-3xl font-bold">
-                        Articles
-                    </h1>
-
-                    <Link
-                        href="/articles/create"
-                        className="bg-indigo-600 text-white px-4 py-2 rounded"
-                    >
-                        Create
-                    </Link>
-
-                </div>
-
-                <div className="space-y-4">
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 
                     {articles.map(article => (
 
                         <Link
                             key={article.id}
                             href={`/articles/${article.id}`}
-                            className="block border p-4 rounded hover:bg-gray-50"
+                            className="block rounded-lg bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
                         >
 
-                            <h2 className="font-bold text-xl">
+                            <h2 className="mb-2 text-xl font-semibold text-gray-900">
                                 {article.title}
                             </h2>
 
-                            <p className="text-sm text-gray-500">
+                            <p className="mb-4 text-sm text-gray-500">
                                 {new Date(article.created_at).toLocaleDateString()}
                             </p>
 
-                            <p>
-                                {article.content.slice(0, 150)}...
+                            <p className="text-gray-600 line-clamp-3">
+                                {article.content.substring(0, 150)}...
                             </p>
+
+                            <div className="mt-4 text-sm text-indigo-600">
+                                {article.comments?.length ?? 0} comments
+                            </div>
 
                         </Link>
 
