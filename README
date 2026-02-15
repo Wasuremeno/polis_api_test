@@ -1,0 +1,48 @@
+# Stack
+
+- Laravel 12.51.0
+- Inertia 
+- React 19.2.4 
+- TypeScript
+- TailwindCSS
+- MySQL
+- Laravel Sail (Docker)
+- PHPUnit
+
+
+## Requirements
+
+- Docker
+- Docker Compose
+- Composer
+
+
+## API Endpoints
+
+GET    /api/articles
+GET    /api/articles/{id}
+POST   /api/articles
+POST   /api/articles/{id}/comments
+
+## Postman Collection
+<img src="postman.png" alt="postman" width="500" height="300">
+<img src="newman.png" alt="postman" width="500" height="300">
+
+
+
+## Installation
+
+Clone repository:
+
+```bash
+git clone https://github.com/Wasuremeno/polis_api_test.git
+cd polis_api_test
+./vendor/bin/sail up
+./vendor/bin/sail artisan migrate:refresh --seed
+./vendor/bin/sail artisan test
+./vendor/bin/sail artisan key:generate
+./vendor/bin/sail npm install --save-dev newman
+./vendor/bin/sail npm install
+./vendor/bin/sail npm run dev
+
+

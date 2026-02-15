@@ -1,0 +1,85 @@
+{
+  "info": {
+    "_postman_id": "f10038be-a0c4-46e9-9230-13170254f2dc",
+    "name": "polis_api",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "GET /api/articles",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "http://localhost/api/articles",
+          "protocol": "http",
+          "host": ["localhost"],
+          "path": ["api", "articles"]
+        }
+      }
+    },
+    {
+      "name": "GET /api/articles/1",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "http://localhost/api/articles/1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "path": ["api", "articles", "1"]
+        }
+      }
+    },
+    {
+      "name": "POST /api/articles",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Accept", "value": "application/json" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"My New Article\",\n  \"content\": \"This is the content of my new article.\"\n}",
+          "options": {
+            "raw": { "language": "json" }
+          }
+        },
+        "url": {
+          "raw": "http://localhost/api/articles",
+          "protocol": "http",
+          "host": ["localhost"],
+          "path": ["api", "articles"]
+        }
+      }
+    },
+    {
+      "name": "POST /api/articles/1/comments",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Accept", "value": "application/json" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"author_name\": \"John Doe\",\n  \"content\": \"Great article! Very informative.\"\n}",
+          "options": {
+            "raw": { "language": "json" }
+          }
+        },
+        "url": {
+          "raw": "http://localhost/api/articles/1/comments",
+          "protocol": "http",
+          "host": ["localhost"],
+          "path": ["api", "articles", "1", "comments"]
+        }
+      }
+    }
+  ]
+}
