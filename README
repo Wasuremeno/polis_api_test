@@ -25,8 +25,9 @@ POST   /api/articles
 POST   /api/articles/{id}/comments
 
 ## Postman Collection
-<img src="postman.png" alt="postman" width="500" height="300">
-<img src="newman.png" alt="postman" width="500" height="300">
+![Postman](postman.png)
+![Newman](newman.png)
+
 
 
 
