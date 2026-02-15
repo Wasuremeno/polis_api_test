@@ -28,8 +28,7 @@ POST   /api/articles/{id}/comments
 ![Postman](postman.png)
 ![Newman](newman.png)
 
-
-
+около ~7h,время которое было затрачено на выполнение этого задания.
 
 ## Installation
 
@@ -45,5 +44,7 @@ cd polis_api_test
 ./vendor/bin/sail npm install --save-dev newman
 ./vendor/bin/sail npm install
 ./vendor/bin/sail npm run dev
+
+
 
 
